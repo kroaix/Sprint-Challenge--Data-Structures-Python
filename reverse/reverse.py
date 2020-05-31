@@ -39,4 +39,37 @@ class LinkedList:
         return False
 
     def reverse_list(self, node, prev):
-        pass
+        # no while loops in recursive functions so we will do an if else
+        # node = current, prev = previous
+        # O(n) recursive
+        # pointer manipulation
+        # if current node is 2 with prev being 1 we want instead to re-order it so that 2 is the prev and 1 is current so we need to change the direction the pointers are going
+        # we will do this by storing our current, prev and next.. and manipulating those as long as current node is not None
+
+        # For example,
+        # ```
+        # 1 -> 2 -> 3 -> None
+        # ```
+        # would become...
+        # ```
+        # 1 <- 2 <- 3 <- None
+        # 3 -> 2 -> 1 -> None
+        # ```
+
+        # we've reached the end of the list, current = none
+        if node is None:
+            return 
+        # if next node is none 
+        if node.next_node is None:
+        # new head becomes current node
+            self.head = node
+            #next node of the new head = value of prev
+            node.next_node = prev
+        # not at the end
+        else:
+            # saving next in temporary variable
+            next_node = node.next_node
+            # reversing.. point current node to previous node
+            # prev node becomes current
+            node.next_node = prev
+            self.reverse_list(next_node, node)
